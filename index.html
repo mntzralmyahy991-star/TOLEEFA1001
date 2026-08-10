@@ -88,7 +88,7 @@
         <div class="form-group">
             <label>المجمع السكني أو الوجهة الكبرى:</label>
             <select id="custCity" onchange="toggleCityField(this.value)">
-                <option value="مجمع مدينة الأمل السكني">مجمع مدينة الأمل السكني</option>
+                <option value="مجمع mينة الأمل السكني">مجمع مدينة الأمل السكني</option>
                 <option value="مجمع جوهرة البصرة السكني">مجمع جوهرة البصرة السكني</option>
                 <option value="مجمع درة البصرة السكني">مجمع درة البصرة السكني</option>
                 <option value="مجمع عين البصرة السكني">مجمع عين البصرة السكني</option>
@@ -97,7 +97,7 @@
             </select>
         </div>
         
-        <!-- حقل أخرى المعزز برمجياً للعمل الإجباري والفوري -->
+        <!-- حقل التعديل اليدوي المفتوح تلقائياً ومباشرة للفحص -->
         <div class="form-group" id="otherCityGroup" style="display: block;">
             <label>يرجى كتابة اسم المنطقة أو المدينة هنا يدوياً:</label>
             <input type="text" id="otherCityInput" value="منطقة العشار">
@@ -146,7 +146,7 @@
         <div class="radio-group">
             <div class="radio-option selected" onclick="setAnswer('q3', 'أ', this)">أ) طاقة، حيوية، وانتعاش يجدد النشاط اليومي.</div>
             <div class="radio-option" onclick="setAnswer('q3', 'ب', this)">ب) هدوء، سكينة، وراحة بال تبث الطمأنينة.</div>
-            <div class="radio-option" onclick="setAnswer('q3', 'ج', this)">ج) ثقة، فخامة، وجاذبية تفرض حضورك الفوري.</div>
+            <div class="radio-option" onclick="chooseDeepStyle(this)">ج) ثقة، فخامة، وجاذبية تفرض حضورك الفوري.</div>
         </div>
         <div class="btn-container">
             <button class="btn-back" onclick="navigate('q2Step', 'q3Step')">السابق</button>
@@ -159,7 +159,7 @@
         <div class="radio-group">
             <div class="radio-option selected" onclick="setAnswer('q4', 'أ', this)">أ) الروائح الباردة (فواكه قطنية، حمضيات، وإحساس النظافة).</div>
             <div class="radio-option" onclick="setAnswer('q4', 'ب', this)">ب) الروائح السكرية الدافئة (فانيليا مخملية، أزهار وورود ناعمة).</div>
-            <div class="radio-option" onclick="chooseDeepStyle(this)">ج) الروائح العميقة (أخشاب معتقة، عود كمبودي، عنبر الحوت).</div>
+            <div class="radio-option" onclick="chooseDeepStyle2(this)">ج) الروائح العميقة (أخشاب معتقة، عود كمبودي، عنبر الحوت).</div>
         </div>
         <div class="btn-container">
             <button class="btn-back" onclick="navigate('q3Step', 'q4Step')">السابق</button>
