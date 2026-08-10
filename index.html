@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOLEEFA1001 | مختبر العطور الذكي</title>
+    <title>AI Perfume Lab | مختبر العطور الذكي</title>
     <style>
         :root {
             --primary: #d4af37; /* ذهبي ملكي */
@@ -20,7 +20,6 @@
             padding: 0;
             min-height: 100vh;
         }
-        /* الهيدر التسويقي */
         header {
             background: linear-gradient(180deg, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0) 100%);
             padding: 30px 20px;
@@ -98,7 +97,7 @@
         .result-box {
             background-color: #0d0d0d; border-right: 4px solid var(--primary); padding: 25px;
             border-radius: 10px; white-space: pre-wrap; margin-top: 20px; font-size: 14px;
-            line-height: 1.8; border-left: none; color: #e0e0e0;
+            line-height: 1.8; color: #e0e0e0;
         }
         .progress-bar { height: 3px; background-color: #222; width: 100%; overflow: hidden; }
         .progress-fill { height: 100%; background-color: var(--primary); width: 0%; transition: width 0.4s ease; }
@@ -138,7 +137,7 @@
             <div class="form-group">
                 <label>المجمع السكني أو الوجهة الكبرى:</label>
                 <select id="custCity" onchange="toggleOtherCityField()">
-                    <option value="مجمع مدينة الأمل السكني">مجمع مدينة الأمل السكني</option>
+                    <option value="مجمع مدينة الأمل السكني" selected>مجمع مدينة الأمل السكني</option>
                     <option value="مجمع جوهرة البصرة السكني">مجمع جوهرة البصرة السكني</option>
                     <option value="مجمع درة البصرة السكني">مجمع درة البصرة السكني</option>
                     <option value="مجمع عين البصرة السكني">مجمع عين البصرة السكني</option>
@@ -147,6 +146,7 @@
                 </select>
             </div>
             
+            <!-- حقل يظهر تلقائياً لـ أخرى -->
             <div class="form-group hidden-field" id="otherCityGroup">
                 <label>يرجى تحديد المنطقة بدقة في البصرة:</label>
                 <input type="text" id="otherCityInput" placeholder="مثال: منطقة العشار / حي الحسين">
