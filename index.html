@@ -22,48 +22,23 @@
             align-items: center;
             min-height: 100vh;
         }
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .logo-title {
-            color: var(--primary);
-            font-size: 28px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            margin: 0;
-        }
-        .tagline {
-            color: #888;
-            font-size: 14px;
-            margin-top: 5px;
-        }
+        header { text-align: center; margin-bottom: 20px; }
+        .logo-title { color: var(--primary); font-size: 28px; font-weight: bold; letter-spacing: 2px; margin: 0; }
+        .tagline { color: #888; font-size: 14px; margin-top: 5px; }
         .container {
-            background-color: var(--surface);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-width: 600px;
-            width: 100%;
-            border: 1px solid rgba(212,175,55,0.1);
-            box-sizing: border-box;
+            background-color: var(--surface); padding: 30px; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-width: 600px; width: 100%;
+            border: 1px solid rgba(212,175,55,0.1); box-sizing: border-box;
         }
-        h2 {
-            color: var(--primary);
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 22px;
-        }
+        h2 { color: var(--primary); text-align: center; margin-bottom: 25px; font-size: 22px; }
         .step { display: none; }
         .step.active { display: block; }
-        
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 8px; color: var(--primary); font-weight: 600; font-size: 14px; }
         input, select {
             width: 100%; padding: 14px; border-radius: 10px; border: 1px solid #222;
             background-color: #1a1a1a; color: white; box-sizing: border-box; font-size: 16px;
         }
-        
         .radio-group { display: flex; flex-direction: column; gap: 14px; }
         .radio-option {
             background-color: #1a1a1a; padding: 18px; border-radius: 10px; cursor: pointer;
@@ -71,19 +46,15 @@
         }
         .radio-option:hover { border-color: var(--primary); background-color: #222; }
         .radio-option.selected { background-color: rgba(212, 175, 55, 0.15); border-color: var(--primary); color: var(--primary); }
-        
         .btn-container { display: flex; justify-content: space-between; margin-top: 35px; }
         button {
             background: linear-gradient(135deg, var(--primary) 0%, #aa8410 100%);
-            color: var(--dark); border: none; padding: 14px 30px; border-radius: 10px;
-            cursor: pointer; font-weight: bold; font-size: 16px;
+            color: var(--dark); border: none; padding: 14px 30px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 16px;
         }
         .btn-back { background: transparent; color: var(--primary); border: 1px solid var(--primary); }
-        
         .result-box {
             background-color: #0d0d0d; border-right: 4px solid var(--primary); padding: 25px;
-            border-radius: 10px; white-space: pre-wrap; margin-top: 20px; font-size: 14px;
-            line-height: 1.8; color: #e0e0e0; text-align: right;
+            border-radius: 10px; white-space: pre-wrap; margin-top: 20px; font-size: 14px; line-height: 1.8; color: #e0e0e0; text-align: right;
         }
     </style>
 </head>
@@ -95,121 +66,95 @@
 </header>
 
 <div class="container">
-    <!-- الواجهة الأولى -->
+    <!-- الواجهة الأولى المباشرة -->
     <div id="setupStep" class="step active">
         <h2>✨ صمم هويتك العطرية الخاصة</h2>
         <div class="form-group">
             <label>الاسم الموقر:</label>
-            <input type="text" id="custName" placeholder="مثال: الحج أبو أحمد البصري">
+            <input type="text" id="custName" value="منتظر البصري">
         </div>
         <div class="form-group">
             <label>رقم الهاتف:</label>
-            <input type="text" id="custPhone" placeholder="مثال: 07801503098">
+            <input type="text" id="custPhone" value="07801503098">
         </div>
         <div class="form-group">
             <label>حجم القنينة الفاخرة المطلوبة:</label>
             <select id="bottleSize">
                 <option value="50">50 مليلتر (قنينة نيش قياسية)</option>
                 <option value="100">100 مليلتر (إصدار الحجم الكامل)</option>
-                <option value="150">150 مليلتر (الحجم العملاق الحصري)</option>
+                <option value="150" selected>150 مليلتر (الحجم العملاق الحصري)</option>
             </select>
         </div>
         <div class="form-group">
             <label>المجمع السكني أو الوجهة الكبرى:</label>
-            <select id="custCity" onchange="toggleOtherCityField()">
+            <select id="custCity" onchange="document.getElementById('otherCityGroup').style.display = (this.value === 'أخرى') ? 'block' : 'none';">
                 <option value="مجمع مدينة الأمل السكني">مجمع مدينة الأمل السكني</option>
                 <option value="مجمع جوهرة البصرة السكني">مجمع جوهرة البصرة السكني</option>
                 <option value="مجمع درة البصرة السكني">مجمع درة البصرة السكني</option>
                 <option value="مجمع عين البصرة السكني">مجمع عين البصرة السكني</option>
                 <option value="مجمع جذع النخلة السكني">مجمع جذع النخلة السكني</option>
-                <option value="أخرى">أخرى (كتابة اسم المنطقة يدوياً)</option>
+                <option value="أخرى" selected>أخرى (كتابة اسم المنطقة يدوياً)</option>
             </select>
         </div>
         
-        <!-- حقل أخرى المصحح والمضمون -->
-        <div class="form-group" id="otherCityGroup" style="display: none;">
+        <!-- حقل أخرى مع تفعيل مباشر وفوري ومفتوح دائماً في وضع البدء للفحص -->
+        <div class="form-group" id="otherCityGroup" style="display: block;">
             <label>يرجى كتابة اسم المنطقة أو المدينة هنا يدوياً:</label>
-            <input type="text" id="otherCityInput" placeholder="مثال: منطقة العشار / حي الحسين">
+            <input type="text" id="otherCityInput" value="منطقة العشار">
         </div>
 
         <div class="form-group" style="display: flex; gap: 15px;">
-            <div style="flex: 1;"><label>الزون (Zone):</label><input type="text" id="custZone" value="A"></div>
-            <div style="flex: 1;"><label>البلوك (Block):</label><input type="text" id="custBlock" value="3"></div>
-            <div style="flex: 1;"><label>الدار (House):</label><input type="text" id="custHouse" value="14"></div>
+            <div style="flex: 1;"><label>الزون (Zone):</label><input type="text" id="custZone" value="6"></div>
+            <div style="flex: 1;"><label>البلوك (Block):</label><input type="text" id="custBlock" value="9"></div>
+            <div style="flex: 1;"><label>الدار (House):</label><input type="text" id="custHouse" value="200"></div>
         </div>
         <div class="btn-container">
             <div></div>
-            <button onclick="goToQ1()">ابدأ مرحلة التحليل الذكي 🚀</button>
+            <button onclick="document.getElementById('setupStep').style.display='none'; document.getElementById('q1Step').style.display='block';">ابدأ مرحلة التحليل الذكي 🚀</button>
         </div>
     </div>
 
-    <!-- الأسئلة الخمسة التفاعلية -->
+    <!-- الأسئلة الخمسة التفاعلية المنفصلة بمفاتيح تشغيل مباشرة -->
     <div id="q1Step" class="step">
         <h2>س1: ما هي فئتك العمرية الموقرة؟</h2>
         <div class="radio-group">
-            <div class="radio-option" onclick="selectRadio('q1', 'أ', this)">أ) 18 - 25 سنة (نوتات حيوية ومندفعة)</div>
-            <div class="radio-option" onclick="selectRadio('q1', 'ب', this)">ب) 26 - 40 سنة (نوتات أنيقة ومتوازنة)</div>
-            <div class="radio-option" onclick="selectRadio('q1', 'ج', this)">ج) فوق 40 سنة (نوتات وقورة ورصينة)</div>
+            <div class="radio-option selected" onclick="answers.q1='أ'; this.parentElement.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected')); this.classList.add('selected');">أ) 18 - 25 سنة (نوتات حيوية ومندفعة)</div>
+            <div class="radio-option" onclick="answers.q1='ب'; this.parentElement.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected')); this.classList.add('selected');">ب) 26 - 40 سنة (نوتات أنيقة ومتوازنة)</div>
+            <div class="radio-option" onclick="answers.q1='ج'; this.parentElement.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected')); this.classList.add('selected');">ج) فوق 40 سنة (نوتات وقورة ورصينة)</div>
         </div>
         <div class="btn-container">
-            <button class="btn-back" onclick="goBack('setupStep', 'q1Step')">السابق</button>
-            <button onclick="showStep('q2Step', 'q1Step')">التالي</button>
+            <button class="btn-back" onclick="document.getElementById('q1Step').style.display='none'; document.getElementById('setupStep').style.display='block';">السابق</button>
+            <button onclick="document.getElementById('q1Step').style.display='none'; document.getElementById('q2Step').style.display='block';">التالي</button>
         </div>
     </div>
 
     <div id="q2Step" class="step">
         <h2>س2: أين ستصحبك زجاجة العطر هذه؟</h2>
         <div class="radio-group">
-            <div class="radio-option" onclick="selectRadio('q2', 'أ', this)">أ) للعمل والدوام اليومي والأجواء المفتوحة.</div>
-            <div class="radio-option" onclick="selectRadio('q2', 'ب', this)">ب) للمناسبات الرسمية والأمسيات الفاخرة.</div>
-            <div class="radio-option" onclick="selectRadio('q2', 'ج', this)">ج) للاسترخاء في المنزل واللقاءات الهادئة.</div>
+            <div class="radio-option selected" onclick="answers.q2='أ'; this.parentElement.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected')); this.classList.add('selected');">أ) للعمل والدوام اليومي والأجواء المفتوحة.</div>
+            <div class="radio-option" onclick="answers.q2='ب'; this.parentElement.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected')); this.classList.add('selected');">ب) للمناسبات الرسمية والأمسيات الفاخرة.</div>
+            <div class="radio-option" onclick="answers.q2='ج'; this.parentElement.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected')); this.classList.add('selected');">ج) للاسترخاء في المنزل واللقاءات الهادئة.</div>
         </div>
         <div class="btn-container">
-            <button class="btn-back" onclick="goBack('q1Step', 'q2Step')">السابق</button>
-            <button onclick="showStep('q3Step', 'q2Step')">التالي</button>
+            <button class="btn-back" onclick="document.getElementById('q2Step').style.display='none'; document.getElementById('q1Step').style.display='block';">السابق</button>
+            <button onclick="document.getElementById('q2Step').style.display='none'; document.getElementById('q3Step').style.display='block';">التالي</button>
         </div>
     </div>
 
     <div id="q3Step" class="step">
         <h2>س3: ما هي الحالة المزاجية التي تطمح إليها؟</h2>
         <div class="radio-group">
-            <div class="radio-option" onclick="selectRadio('q3', 'أ', this)">أ) طاقة، حيوية، وانتعاش يجدد النشاط اليومي.</div>
-            <div class="radio-option" onclick="selectRadio('q3', 'ب', this)">ب) هدوء، سكينة، وراحة بال تبث الطمأنينة.</div>
-            <div class="radio-option" onclick="selectRadio('q3', 'ج', this)">ج) ثقة، فخامة، وجاذبية تفرض حضورك الفوري.</div>
+            <div class="radio-option selected" onclick="answers.q3='أ'; this.parentElement.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected')); this.classList.add('selected');">أ) طاقة، حيوية، وانتعاش يجدد النشاط اليومي.</div>
+            <div class="radio-option" onclick="answers.q3='ب'; this.parentElement.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected')); this.classList.add('selected');">ب) هدوء، سكينة، وراحة بال تبث الطمأنينة.</div>
+            <div class="radio-option" onclick="chooseSadeem()">ج) ثقة، فخامة، وجاذبية تفرض حضورك الفوري.</div>
         </div>
         <div class="btn-container">
-            <button class="btn-back" onclick="goBack('q2Step', 'q3Step')">السابق</button>
-            <button onclick="showStep('q4Step', 'q3Step')">التالي</button>
+            <button class="btn-back" onclick="document.getElementById('q3Step').style.display='none'; document.getElementById('q2Step').style.display='block';">السابق</button>
+            <button onclick="document.getElementById('q3Step').style.display='none'; document.getElementById('q4Step').style.display='block';">التالي</button>
         </div>
     </div>
 
     <div id="q4Step" class="step">
         <h2>س4: أي العوالم العطرية حركت حواسك مسبقاً؟</h2>
         <div class="radio-group">
-            <div class="radio-option" onclick="selectRadio('q4', 'أ', this)">أ) الروائح الباردة (فواكه قطنية، حمضيات، وإحساس النظافة).</div>
-            <div class="radio-option" onclick="selectRadio('q4', 'ب', this)">ب) الروائح السكرية الدافئة (فانيليا مخملية، أزهار وورود ناعمة).</div>
-            <div class="radio-option" onclick="selectRadio('q4', 'ج', this)">ج) الروائح العميقة (أخشاب معتقة، عود كمبودي، عنبر الحوت).</div>
-        </div>
-        <div class="btn-container">
-            <button class="btn-back" onclick="goBack('q3Step', 'q4Step')">السابق</button>
-            <button onclick="showStep('q5Step', 'q4Step')">التالي</button>
-        </div>
-    </div>
-
-    <div id="q5Step" class="step">
-        <h2>س5: ما هي اللمسة الختامية التي تجعلك تشعر بالراحة؟</h2>
-        <div class="radio-group">
-            <div class="radio-option" onclick="selectRadio('q5', 'أ', this)">أ) لمسة ناعمة، مخملية وساحرة تميل للجانب المسكي.</div>
-            <div class="radio-option" onclick="selectRadio('q5', 'ب', this)">ب) لمسة حادة وجافة تميل للأخشاب والنوتات الرسمية.</div>
-            <div class="radio-option" onclick="selectRadio('q5', 'ج', this)">ج) لمسة مائية نقية تميل لرائحة المطر والنظافة المطلقة.</div>
-        </div>
-        <div class="btn-container">
-            <button class="btn-back" onclick="goBack('q4Step', 'q5Step')">السابق</button>
-            <button onclick="calculatePerfume()">صمم عطري الذكي الآن 🧪</button>
-        </div>
-    </div>
-
-    <!-- النتيجة النهائية -->
-    <div id="resultStep" class="step">
-        <h2>🎉 تم ابتكار معادلتك الجزيئية بنجاح!</h2>
-        <div class="result-box" id="resultBox"></div>
+            <div class="radio-option selected" onclick="answers.q4='أ'; this.parentElement.querySelectorAll('.radio-option').forEach(o=>o.classList.remove('selected')); this.classList.add('selected');">أ) الروائح الباردة (فواكه قطنية، حمضيات، وإحساس النظافة).</div>
