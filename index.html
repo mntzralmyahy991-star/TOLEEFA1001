@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Perfume Lab | مختبر العطور الذكي</title>
+    <style>
+        :root {
+            --primary: #d4af37; /* ذهبي ملكي */
+            --dark: #0a0a0a;
+            --surface: #141414;
+            --text: #ffffff;
+            --accent: #aa8410;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        /* الهيدر التسويقي */
+        header {
+            background: linear-gradient(180deg, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0) 100%);
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .logo-title {
+            color: var(--primary);
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(212,175,55,0.3);
+        }
+        .tagline {
+            color: #888;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .main-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background-color: var(--surface);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            max-width: 600px;
+            width: 100%;
+            border: 1px solid rgba(212,175,55,0.1);
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+        h2 {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+        .step { display: none; animation: fadeIn 0.5s ease; }
+        .step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: var(--primary); font-weight: 600; font-size: 14px; }
+        input, select {
+            width: 100%; padding: 14px; border-radius: 10px; border: 1px solid #222;
+            background-color: #1a1a1a; color: white; box-sizing: border-box; font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 8px rgba(212,175,55,0.2); outline: none; }
+        
+        .radio-group { display: flex; flex-direction: column; gap: 14px; }
+        .radio-option {
+            background-color: #1a1a1a; padding: 18px; border-radius: 10px; cursor: pointer;
+            border: 1px solid #222; transition: all 0.3s ease; font-size: 15px;
+        }
+        .radio-option:hover { border-color: var(--primary); background-color: #222; transform: translateX(-3px); }
+        .radio-option.selected { background-color: rgba(212, 175, 55, 0.08); border-color: var(--primary); color: var(--primary); }
+        
+        .btn-container { display: flex; justify-content: space-between; margin-top: 35px; }
+        button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: var(--dark); border: none; padding: 14px 30px; border-radius: 10px;
+            cursor: pointer; font-weight: bold; font-size: 16px; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212,175,55,0.2);
+        }
+        button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212,175,55,0.4); }
+        button:disabled { background: #333; color: #666; cursor: not-allowed; transform: none; box-shadow: none; }
+        .btn-back { background: transparent; color: var(--primary); border: 1px solid var(--primary); box-shadow: none; }
+        .btn-back:hover { background: rgba(212,175,55,0.05); }
+        
+        .result-box {
+            background-color: #0d0d0d; border-right: 4px solid var(--primary); padding: 25px;
+            border-radius: 10px; white-space: pre-wrap; margin-top: 20px; font-size: 14px;
+            line-height: 1.8; border-left: none; color: #e0e0e0;
+        }
+        .progress-bar { height: 3px; background-color: #222; width: 100%; overflow: hidden; }
+        .progress-fill { height: 100%; background-color: var(--primary); width: 0%; transition: width 0.4s ease; }
+        .hidden-field { display: none; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-title">AI PERFUME LAB</div>
+    <div class="tagline">أول مختبر عطور جزيئي يعتمد على الذكاء الاصطناعي في البصرة</div>
+</header>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="main-wrapper">
+    <div class="container">
+        <!-- خطوة البيانات الإدارية -->
+        <div id="setupStep" class="step active">
+            <h2>✨ صمم هويتك العطرية الخاصة</h2>
+            <div class="form-group">
+                <label>الاسم الموقر:</label>
+                <input type="text" id="custName" placeholder="مثال: الحج أبو أحمد البصري">
+            </div>
+            <div class="form-group">
+                <label>رقم الهاتف:</label>
+                <input type="tel" id="custPhone" placeholder="مثال: 077XXXXXXXX">
+            </div>
+            <div class="form-group">
+                <label>حجم القنينة الفاخرة المطلوبة:</label>
+                <select id="bottleSize">
+                    <option value="50" selected>50 مليلتر (قنينة نيش قياسية)</option>
+                    <option value="100">100 مليلتر (إصدار الحجم الكامل)</option>
+                    <option value="150">150 مليلتر (الحجم العملاق الحصري)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>المجمع السكني أو الوجهة الكبرى:</label>
+                <select id="custCity" onchange="toggleOtherCityField()">
+                    <option value="مجمع مدينة الأمل السكني">مجمع مدينة الأمل السكني</option>
+                    <option value="مجمع جوهرة البصرة السكني">مجمع جوهرة البصرة السكني</option>
+                    <option value="مجمع درة البصرة السكني">مجمع درة البصرة السكني</option>
+                    <option value="مجمع عين البصرة السكني">مجمع عين البصرة السكني</option>
+                    <option value="مجمع جذع النخلة السكني">مجمع جذع النخلة السكني</option>
+                    <option value="أخرى">أخرى (كتابة اسم المنطقة يدوياً)</option>
+                </select>
+            </div>
+            
+            <div class="form-group hidden-field" id="otherCityGroup">
+                <label>يرجى تحديد المنطقة بدقة في البصرة:</label>
+                <input type="text" id="otherCityInput" placeholder="مثال: منطقة العشار / حي الحسين">
+            </div>
+
+            <div class="form-group" style="display: flex; gap: 15px;">
+                <div style="flex: 1;"><label>الزون (Zone):</label><input type="text" id="custZone" placeholder="A"></div>
+                <div style="flex: 1;"><label>البلوك (Block):</label><input type="text" id="custBlock" placeholder="3"></div>
+                <div style="flex: 1;"><label>الدار (House):</label><input type="text" id="custHouse" placeholder="14"></div>
+            </div>
+            <div class="btn-container">
+                <div></div>
+                <button onclick="nextStep(1)">ابدأ مرحلة التحليل الذكي 🚀</button>
+            </div>
+        </div>
+
+        <!-- الأسئلة الخمسة المتتالية -->
+        <div id="q1Step" class="step">
+            <h2>س1: ما هي فئتك العمرية الموقرة؟</h2>
+            <div class="radio-group">
+                <div class="radio-option" onclick="selectRadio('q1', 'أ', this)">أ) 18 - 25 سنة (نوتات حيوية ومندفعة)</div>
+                <div class="radio-option" onclick="selectRadio('q1', 'ب', this)">ب) 26 - 40 سنة (نوتات أنيقة، عملية ومتوازنة)</div>
+                <div class="radio-option" onclick="selectRadio('q1', 'ج', this)">ج) فوق 40 سنة (نوتات وقورة ورصينة)</div>
+            </div>
+            <div class="btn-container">
+                <button class="btn-back" onclick="prevStep('setupStep')">السابق</button>
+                <button id="btn-q1" disabled onclick="nextStep(2)">التالي</button>
+            </div>
+        </div>
+
+        <div id="q2Step" class="step">
+            <h2>س2: أين ستصحبك زجاجة العطر هذه؟</h2>
+            <div class="radio-group">
+                <div class="radio-option" onclick="selectRadio('q2', 'أ', this)">أ) للعمل والدوام اليومي والأجواء المفتوحة.</div>
+                <div class="radio-option" onclick="selectRadio('q2', 'ب', this)">ب) للمناسبات الرسمية والأمسيات الفاخرة.</div>
+                <div class="radio-option" onclick="selectRadio('q2', 'ج', this)">ج) للاسترخاء في المنزل واللقاءات الهادئة.</div>
+            </div>
+            <div class="btn-container">
+                <button class="btn-back" onclick="prevStep('q1Step')">السابق</button>
+                <button id="btn-q2" disabled onclick="nextStep(3)">التالي</button>
+            </div>
+        </div>
+
+        <div id="q3Step" class="step">
+            <h2>س3: ما هي الحالة المزاجية التي تطمح إليها؟</h2>
+            <div class="radio-group">
+                <div class="radio-option" onclick="selectRadio('q3', 'أ', this)">أ) طاقة، حيوية، وانتعاش يجدد النشاط اليومي.</div>
+                <div class="radio-option" onclick="selectRadio('q3', 'ب', this)">ب) هدوء، سكينة، وراحة بال تبث الطمأنينة.</div>
+                <div class="radio-option" onclick="selectRadio('q3', 'ج', this)">ج) ثقة، فخامة، وجاذبية تفرض حضورك الفوري.</div>
+            </div>
+            <div class="btn-container">
+                <button class="btn-back" onclick="prevStep('q2Step')">السابق</button>
+                <button id="btn-q3" disabled onclick="nextStep(4)">التالي</button>
+            </div>
+        </div>
+
